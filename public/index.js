@@ -12,7 +12,7 @@ async function main() {
     const stocks = [GME, MSFT, DIS, BNTX];
 
     
-    console.log(stocks[0].values)                                                
+    // console.log(stocks[0].values)                                                
     stocks[0].values.map( value => value. _)
     
     new Chart(timeChartCanvas.getContext('2d'), {
@@ -33,6 +33,23 @@ async function main() {
         type: 'bar',
         data: {
             labels: stocks[0].values.map(value =>value.high),
+            
+            datasets: stocks.map( stock=> ( {
+                label: stock.meta.symbol,
+                data: stock.values.map(value => parseFloat(value.high)),
+                backgroundColor: getColor(stock.meta.symbol),
+                borderColor: getColor(stock.meta.symbol),
+            }))
+          
+        }
+    })
+
+
+    new Chart(averagePriceChartCanvas.getContext('2d'), {
+        type: 'pie',
+        data: {
+            labels: stocks[0].values.map(value =>value.high),
+            
             datasets: stocks.map( stock=> ( {
                 label: stock.meta.symbol,
                 data: stock.values.map(value => parseFloat(value.high)),
