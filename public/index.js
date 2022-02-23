@@ -25,15 +25,24 @@ async function main() {
                 backgroundColor: getColor(stock.meta.symbol),
                 borderColor: getColor(stock.meta.symbol),
             }))
-       
-
         
         }
     });
-    console.log(stocks[0].values)                                                
-   console.log(mockData)
-    
-    // console.log(responseText)
+    new Chart(highestPriceChartCanvas.getContext('2d'), {
+
+        type: 'bar',
+        data: {
+            labels: stocks[0].values.map(value =>value.high),
+            datasets: stocks.map( stock=> ( {
+                label: stock.meta.symbol,
+                data: stock.values.map(value => parseFloat(value.high)),
+                backgroundColor: getColor(stock.meta.symbol),
+                borderColor: getColor(stock.meta.symbol),
+            }))
+          
+        }
+    })
+
 }
 
 main()
